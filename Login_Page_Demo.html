@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login to Amiedra</title>
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Montez&family=Niconne" rel="stylesheet">
+</head>
+
+<style>
+
+    html {
+        font-size: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        height: 91vh;
+        min-height: 700px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        /* background-color: rgb(24, 26, 44); */
+        background-color: rgb(15, 16, 27); /* SITAS */
+        /* background-image: linear-gradient(rgb(15, 16, 27), rgb(59, 64, 110)); */
+    }
+
+    .NavigationBar {
+        margin-top: 3px;
+        position: relative;
+        /* height: 30px; */
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        /* background-color: blue; */
+        border-radius: 1rem;
+        box-shadow: inset 0 0 30px rgb(79, 86, 146);
+        display: flex;
+    }
+    .NavigationBarArea {
+        display: flex;
+        width: 100%;
+    }
+
+    .NavigationBarLinksBox {
+        position: relative;
+        margin-left: 20%;
+        margin-right: 10%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 80%;
+        display: flex;
+        justify-content: space-evenly;
+
+        font-weight: 700;
+    }
+
+
+    .NavigationBarLinksBox a {
+        position: relative;
+        font-size: 2rem;
+        color: rgb(150, 150, 235);
+        text-decoration: none;
+
+        &:hover {
+            color: rgb(191, 191, 253);
+            .glow {
+                transition: all 0.3s ease;
+                background-color: rgb(99, 108, 207);
+                width: 120%;
+            }
+        }
+    }
+
+    .glow {
+        content: '';
+        width: 10px;
+        height: 100%;
+        border-radius: 10px;
+        
+        opacity: 1;
+        position: absolute;
+        display: inline-flex;
+        background-color: rgba(222, 223, 240, 0);
+        filter: blur(10px);
+        left: -10%;
+        z-index: -3;
+
+    }
+
+    .Languages {
+        width: 10%;
+        place-self: center;
+        font-size: 1.5rem;
+        text-align: center;
+        color: rgb(150, 150, 235);
+        font-weight: 700;
+        cursor: pointer ;
+        .RU {
+            color: rgb(150, 150, 235, 0.6);
+        }
+        .LT, .RU {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        span:hover {
+            color: rgb(191, 191, 253);
+            text-shadow: 0 0 10px rgb(191, 191, 253);
+            z-index: 99;
+        }
+    }
+
+    .Hamburger {
+        width: 34px;
+        height: 34px;
+        margin-right: 10px;
+        margin-top: -2px;
+        display: none;
+        position: fixed;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(150, 150, 235);
+        right: 5px;
+        z-index: 99;
+
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .rod, .rod:before, .rod:after {
+        width: 22px;
+        height: 4px;
+        display: block;
+        background-color: rgb(15, 16, 27);
+        border-radius: 5px;
+        content: "";
+        transition: 0.4s linear;
+    }
+
+    .rod {
+        position: relative;
+    }
+
+    .rod:before {
+        top: -6px;
+        position: absolute;
+    }
+
+    .rod:after {
+        top: 6px;
+        position: absolute;
+    }
+
+    .Hamburger.active .rod {
+        background-color: transparent;
+    }
+
+    .Hamburger.active .rod:before {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .Hamburger.active .rod:after {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+
+    .NavigationBarArea.active {
+        width: 60%;
+        height: 300px;  
+        margin-left: 20%;
+        margin-right: auto;
+        margin-top: 18px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        position: fixed;
+        background-color: rgba(150, 150, 235, 0.8);
+        z-index: 2;
+
+    }
+
+    .LoginContainer {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        margin-top: 20px;
+    }
+
+    .LabelCenterTop {
+        position: absolute;
+        width: 34%;
+        margin-left: 33%;
+        margin-right: 33%;
+        margin-top: 7vh;
+        text-align: center;
+
+        border: 1px solid rgba(150, 150, 235, 0);
+
+        color: rgb(150, 150, 235);
+        font-family: "Montez", cursive;
+        text-shadow: 4px 4px 4px #000000;
+        font-size: 6rem;
+        overflow: hidden;
+    }
+
+    .LabelCenterTop:before {
+        content: '';
+        position: absolute;
+        left: -40%;
+        width: 40%;
+        height: 100%;
+        background: linear-gradient(
+            135deg,
+            transparent,
+            rgba(150, 150, 235, 0.4),
+            transparent
+        );
+        transition: all 0.5s;
+    }
+
+    .LabelCenterTop:hover, .hover-simulated {
+
+        animation: RemoveBorder 2s ease-in-out;
+   
+        &:before {
+            left: 100%;
+        }
+
+    }
+
+    .LabelCenterTop.active {
+        color: rgba(150, 150, 235, 0.4);
+    }
+
+    @keyframes RemoveBorder {
+        0% {
+            border: 1px solid rgba(150, 150, 235, 0.1);
+        }
+        50% {
+            border: 1px solid rgba(150, 150, 235, 0.3);
+        }
+        100% {
+            border: 1px solid rgba(150, 150, 235, 0);
+        }
+    }
+
+    .StarPoints {
+        position: relative;
+        border-radius: 50%;
+    }
+    
+
+    .StarPoints:nth-child(7n) {
+        animation-name: InOut;
+        animation-duration: 0.7s;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+    }
+    .StarPoints:nth-child(3n) {
+        animation-name: InOut;
+        animation-duration: 3s;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        
+    }
+
+    .StarPoints:nth-child(11n) {
+        animation-name: Left-Right;
+        animation-duration: 33s;
+        animation-direction: alternate;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+    }
+
+    .StarPoints:nth-child(17n) {
+        animation-name: Left-Right;
+        animation-duration: 17s;
+        animation-direction: alternate-reverse;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes InOut {
+        from {
+            height: 0.3px;
+            width: 0.3px;
+            border-radius: 0;
+
+            margin-left: 3px;
+            margin-top: 3px;
+        }
+        to {
+            height: 5px;
+            width: 5px;
+            border-radius: 50%;
+
+            margin-left: 1px;
+            margin-top: 1px;
+        }
+
+    }
+
+    @keyframes Left-Right {
+        0% {
+            margin-left: 3px;
+            margin-top: 3px;
+            height: 0.3px;
+            width: 0.3px;
+        }
+        25% {
+            margin-left: 100px;
+            margin-top: -50px;
+            height: 5px;
+            width: 5px;     
+        }
+        50% {
+            margin-left: 100px;
+            margin-top: 50px;
+            height: 0.1px;
+            width: 0.1px;
+        }
+        75% {
+            margin-left: -30px;
+            margin-top: 50px;
+            height: 5px;
+            width: 5px;    
+        }
+        100% {
+            margin-left: 50px;
+            margin-top: -30px;
+            height: 0.3px;
+            width: 0.3px;     
+        }
+    }
+
+    .LoginOuterBox {
+        display: flex;
+        position: relative;
+        flex-flow: column;
+        height: 45%;
+        max-height: 45%;
+        width: 50%;
+        max-width: 40%;
+        background-color: rgb(24, 26, 44);
+        border-radius: 3rem;
+        border: none;
+        box-shadow: inset 0 0 50px rgb(79, 86, 146);
+
+        margin-left: auto;
+        margin-right: auto;
+        top: 25%;
+
+        clip-path: ellipse(80% 50%);
+       
+        overflow: hidden;
+
+    }
+
+    .InputFieldsBox {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        width: 100%;
+        height: 60%;
+        max-height: 60%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .loginInput {
+        display: flex;
+        position: relative;
+        height: 30%;
+        max-height: 30%;
+        width: 60%;
+        max-width: 60%;
+        background-color: rgb(67, 67, 100);
+        color: rgb(150, 150, 235);
+        border-radius: 2rem;
+        border: none;
+        outline: none;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        margin-top: 10%;
+
+        font-size: 2rem;
+        text-align: center;
+
+        box-shadow: 10px 10px 10px rgb(15, 16, 27);
+        overflow: hidden;
+        z-index: 2;
+
+        &:hover {
+            box-shadow: 0 0 70px rgb(150, 150, 235);
+        }
+
+        &:focus {
+            box-shadow: 0 0px 40px 10px rgb(150, 150, 235);
+        }
+    }
+
+    .PasswInput {
+        display: flex;
+        position: relative;
+
+        width: 70%;
+        max-width: 60%;
+
+        height: 33%;
+        max-height: 30%;
+
+        margin-top: 3%;
+
+        margin-left: auto;
+        margin-right: auto;
+
+        font-size: 2rem;
+        text-align: center;
+
+        background-color: rgb(67, 67, 100);
+        color: rgb(150, 150, 235);
+        box-shadow: 10px 10px 10px rgb(15, 16, 27);
+        border-radius: 2rem;
+        border: none;
+        outline: none;
+
+        overflow: hidden;
+        z-index: 2;
+
+        &:hover {
+            box-shadow: 0 0 70px rgb(150, 150, 235);
+        }
+
+        &:focus {
+            box-shadow: 0 0px 40px 10px rgb(150, 150, 235);
+        }
+    }
+
+    .LoginButtonsBox {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 3%;
+
+        width: 50%;
+        height: 40%;
+
+    }
+
+    .btnSubmit {
+        justify-self: center;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        width: 20%;
+        min-width: 150px;
+        height: 30%;
+
+        place-self: center;
+        align-items: center;
+
+        font-size: 1.5rem;
+
+        color: rgb(122, 122, 190);
+        background-color: rgb(59, 59, 102);
+        box-shadow: 10px 10px 10px rgb(15, 16, 27);
+
+        border-radius: 0.8rem;
+        border: none;
+
+        cursor: pointer;
+        z-index: 3;
+
+    }   
+
+    .btnSubmit:hover {
+        background-color: rgb(78, 57, 196);
+        transition: ease-in 0.3s;
+    }
+
+    .LinkToRegistrate {
+        width: 20%;
+        min-width: 150px;
+        height: 30%;
+        margin-left: auto;
+        margin-right: auto;
+        align-content: center;
+
+        place-self: center;
+
+        /* border-radius: 3rem; */
+        border-radius: 0.8rem;
+
+        font-size: 1.5rem;
+        font-style: italic;
+        color: rgb(122, 122, 190);
+        text-align: center;
+        text-shadow: 10px 10px 10px black;
+        text-decoration: none;
+
+        flex-wrap: wrap;
+        z-index: 3;
+    }
+
+    .LinkToRegistrate:hover {
+        background-color: rgb(78, 57, 196);
+        text-shadow: none;
+        transition: ease-in 0.3s;
+    }
+
+    .DemoLabelBottom {
+        position: absolute;
+        width: 30%;
+        bottom: 12%;
+        margin-left: 35%;
+        margin-right: 35%;
+        color: rgb(235, 150, 231);
+        font-size: 1.2rem;
+        text-align: center;
+
+    }
+
+    .LabelBottomRight {
+        display: flex;
+        position: absolute;
+        color: rgb(150, 150, 235);
+        font-style: italic;
+        right: 2%;
+        bottom: 2%;
+        &:hover {
+            transition: all 0.2s linear;
+            text-shadow: 0 0 20px rgb(211, 211, 255);
+            font-size: 1.4rem;
+        }
+    }
+
+    /*/// MEDIA ///   /// MEDIA ///   MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   */
+
+    @media screen and (max-width: 1900px) {
+        .LoginButtonsBox {
+            width: 60%;
+        }
+    }
+
+    @media screen and (max-width: 1600px) {
+        .LoginButtonsBox {
+            width: 65%;
+        }
+    }
+    
+
+    @media screen and (max-width: 1400px) {
+        .loginInput {
+            font-size: 1.5rem;
+        }
+
+        .PasswInput {
+            font-size: 1.5rem;
+        }
+
+        .btnSubmit {
+            width: 15%;
+        }
+
+        .LoginButtonsBox {
+            width: 70%;
+        }
+
+    }
+
+    @media screen and (max-width: 1200px) {
+        .LabelCenterTop {
+            font-size: 5rem;
+        }
+
+        .loginInput, .PasswInput {
+            font-size: 1.4rem;
+        }
+
+         .LoginButtonsBox {
+            width: 75%;
+            margin-top: 0;
+        }
+    }
+
+    @media screen and (max-width: 1100px) {
+        .Languages {
+            width: 12%;
+        }
+
+        .LoginButtonsBox {
+            width: 80%;
+            margin-top: 0;
+            margin-bottom: 5%;
+        }
+
+        .loginInput, .PasswInput {
+            width: 70%;
+            max-width: 70%;
+        }
+
+        .btnSubmit, .LinkToRegistrate {
+            font-size: 1.3rem;
+        }
+
+        .DemoLabelBottom {
+            font-size: 1rem;
+        }
+    }
+
+    @media screen and (max-width: 1000px) {
+        .NavigationBarLinksBox a {
+            font-size: 1.5rem;
+        }
+
+        .Languages {
+            font-size: 1.2rem;
+            width: 13%;
+        }
+
+        .LabelCenterTop {
+            font-size: 4rem;
+        }
+
+        .loginInput {
+            font-size: 1.4rem;
+            border-radius: 1.5rem;
+        }
+
+        .PasswInput {
+            font-size: 1.4rem;
+            border-radius: 1.5rem;
+        }
+
+        .LoginOuterBox {
+            max-width: 80%;
+        }
+
+        .LoginButtonsBox {
+            margin-top: 7%;
+            height: 20%;
+        }
+
+        .btnSubmit, .LinkToRegistrate {
+            height: 60%;
+        }
+
+    }
+
+    @media screen and (max-width: 800px) {
+
+        .LoginOuterBox {
+            max-width: 60%;
+            width: 60%;
+        }
+
+        .btnSubmit, .LinkToRegistrate {
+            min-width: 160px;
+        }
+
+    }
+
+    @media screen and (max-width: 770px) {
+        .Languages {
+            width: 14%;
+        }
+
+        .LabelCenterTop {
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
+
+        .LoginOuterBox {
+            max-width: 70%;
+            width: 70%;
+        }
+
+        .loginInput, .PasswInput {
+            font-size: 1.3rem;
+            height: 27%;
+            width: 70%;
+            max-width: 70%;
+        }
+       
+        .btnSubmit {
+            font-size: 1.3rem;
+            height: 60%;
+        }
+
+        .LinkToRegistrate {
+            font-size: 1.3rem;
+            height: 60%;
+        }
+    }
+
+    @media screen and (max-width: 660px) {
+        .NavigationBar {
+            height: 31px;
+        }
+        .NavigationBarArea {
+            display: none;
+        }
+
+        .NavigationBarArea.active {
+            border-radius: 10px;
+
+            animation: LinksBoxAmination;
+            animation-duration: 0.7s;
+
+            .NavigationBarLinksBox {
+                width: fit-content;
+                flex-wrap: wrap;
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10px;
+            }
+            
+            .NavigationBarLinksBox a {
+                width: 100%;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                color: rgb(188, 188, 255);
+
+                &:hover {
+                    .glow {
+                        box-shadow: 0 0 0px 5px rgb(15, 16, 27);
+                    }
+                }
+
+                animation: LinksAmination;
+                animation-duration: 0.4s;
+
+            }
+
+            .Languages {
+                margin-top: 10px;
+                display: flex;
+                flex-direction: column;
+                .RU {
+                    margin-top: 10px;
+                }
+            }
+        }
+
+        @keyframes LinksBoxAmination {
+            from {
+                background-color: transparent;
+            }
+            to {
+                background-color: rgba(150, 150, 235, 0.8);
+            }
+        }
+
+        @keyframes LinksAmination {
+            from {
+                letter-spacing: -10px;
+            }
+            to {
+                letter-spacing: auto;
+            }
+
+        }
+        
+
+        .Hamburger {
+            display: flex;
+        }
+
+        .LoginOuterBox {
+            display: flex;
+            position: relative;
+            flex-flow: column;
+            height: 55%;
+            max-height: 55%;
+            width: 90%;
+            max-width: 90%;
+            top: 20%;
+
+        }
+
+        .loginInput, .PasswInput {
+            font-size: 1.3rem;
+            max-width: 100%;
+            height: 23%;
+        }
+
+        .loginInput {
+            margin-top: 14%;
+        }
+
+        .PasswInput {
+            margin-top: 0;
+        }
+
+        .LoginButtonsBox {
+            width: 60%;
+            margin-top: 4%;
+        }
+
+        .btnSubmit, .LinkToRegistrate {
+            max-width: 130px;
+            margin-top: 0;
+            min-width: 60%;
+        }
+
+        .LinkToRegistrate {
+            margin-top: 15px;
+        }
+
+        .DemoLabelBottom {
+            width: 50%;
+            bottom: 10%;
+            margin-left: 25%;
+            margin-right: 25%;
+        }
+
+        .LabelBottomRight {
+            width: 100%;
+            right: unset;
+            justify-content: center;
+        }
+    }
+
+
+    @media screen and (max-width: 500px) {
+        .LoginContainer {
+            margin-top: 0;
+            height: 90%;
+        }
+
+        .Languages {
+            width: 15%;
+        }
+
+        .LabelCenterTop {
+            width: 70%;
+            margin-left: 15%;
+            margin-right: 15%;
+            font-size: 4rem;
+            margin-top: 3vh;
+
+        }
+
+        .LoginOuterBox {
+            max-height: 35%;
+            top:15%
+        }
+
+        .InputFieldsBox {
+            margin-top: 10px;
+            height: 50%;
+        }
+
+        .loginInput, .PasswInput {
+            width: 80%;
+            border-radius: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .loginInput {
+            margin-top: 10%;
+        }
+
+
+        .PasswInput {
+            margin-top: 10px;
+        }
+
+        .LoginButtonsBox {
+            width: 80%;
+            margin-top: 7%;
+        }
+
+        .DemoLabelBottom {
+            width: 80%;
+            bottom: unset;
+            top: 55%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .LabelBottomRight {
+            top: 67%;
+        }
+    }
+
+    @media screen and (max-width: 376px) {
+        .LabelCenterTop {
+            font-size: 3rem;
+        }
+    }
+
+</style>
+<body>
+    
+    <nav class="NavigationBar">
+        <div class="NavigationBarArea">
+            <div class="NavigationBarLinksBox">
+                <a href="" onclick = MsgForDevelopment()>About us<div class="glow"></div></a>
+                <a href="" onclick = MsgForDevelopment()>Our Team<div class="glow"></div></a>
+                <a href="" onclick = MsgForDevelopment()>Services<div class="glow"></div></a>
+                <a href="" onclick = MsgForDevelopment()>Contacts<div class="glow"></div></a>
+                <a href="" class="Login" onclick = "alert('Dear User,\n\nYou already are on a login page.'+
+                '\n\nPlease enter login details.')">Login<div class="glow"></div></a>
+            </div>
+    
+            <div class="Languages">
+                <span class="LT">LT</span>
+                <span class="RU">RU</span>
+            </div>
+        </div>
+
+        <button class="Hamburger">
+            <span class="rod"></span>
+        </button>
+
+    </nav>
+
+    <div class="LoginContainer">
+        <label class="LabelCenterTop">Login to Amiedra</label>
+
+        <div class="LoginOuterBox">
+            <div class="InputFieldsBox">
+                <input class="loginInput" placeholder="Please enter your login or e-mail"></input>
+                <input class="PasswInput" placeholder="Please enter password" type='password'></input>
+            </div>
+
+            <div class="LoginButtonsBox">
+                <button class="btnSubmit" type="submit" method = "Post">Login</button>
+                <a href="" target = "_self" class="LinkToRegistrate" onclick=MsgForDevelopment()>or register</a>
+            </div>
+        </div>
+
+        <label class="DemoLabelBottom">
+            This is login Demo page. Fully responsive.<br>Try to change browser's window size,<br>hover, press or place cursor on any of elements,<br>also view on phone.
+        </label>
+        
+        <label class="LabelBottomRight"></label>
+    </div>
+    
+    <script>
+        //REFRESH PAGE
+        window.onresize = () => {
+            if (screen.width > 412) {
+                location.reload();
+            }
+        }
+
+        //REFRESH BOTTOM LABEL DATE IF CODE AT THE END IS ACTVATED (OTHERWISE DATE IS STATIC)
+        document.getElementsByClassName("LabelBottomRight")[0].innerHTML = "Created by Aidas (amiedra@gmail.com) 2025"; /*+ new Date().getFullYear();*/
+
+        const loginInputObject = document.getElementsByClassName("loginInput")[0];
+        const InputFieldsBoxObject = document.getElementsByClassName('InputFieldsBox')[0];
+        const PasswInputObject = document.getElementsByClassName("PasswInput")[0];
+        const BtnSubmitObject = document.getElementsByClassName("btnSubmit")[0];
+
+        //LOGIN BUTTONS ACTIONS
+        BtnSubmitObject.addEventListener("click", () => 
+        {
+            if (loginInputObject.value !== "" && PasswInputObject.value !== "")
+            {
+                if (loginInputObject.value.length < 5 || PasswInputObject.value.length < 5) {
+                alert("Dear User,\n\nLogin, e-mail or password is too short !\n\nPlease enter longer.");
+                BtnSubmitObject.innerHTML = "Login";
+                } else {
+                BtnSubmitObject.innerHTML = "You're logged in";
+                }
+            } else {    
+                BtnSubmitObject.innerHTML = "Login";
+                alert("Dear User,\n\nPlease enter login or e-mail and password !");
+            }
+        }
+        );
+
+        //STARS GENERATOR
+        const NavigationBarObject = document.getElementsByClassName('NavigationBar')[0];
+        const LoginOuterBoxObject = document.getElementsByClassName('LoginOuterBox')[0];
+
+        //STAR POINTS QUANTITY
+        const PointsQty = 200;
+        
+        for (i = 0; i <= PointsQty; i++) {
+            
+            let randx = LoginOuterBoxObject.offsetWidth * Math.random();
+            let randy = LoginOuterBoxObject.offsetHeight * Math.random();
+
+            StarPoints = document.createElement("div");
+            StarPoints.className = "StarPoints";
+            StarPoints.style.position = "absolute";
+
+            let PointRadius = Math.random() * 3;
+
+            StarPoints.style.height = PointRadius + "px";
+            StarPoints.style.width = PointRadius + "px";
+            StarPoints.style.backgroundColor = "white";
+
+            const unitsA="px";
+            StarPoints.style.left = randx + unitsA;
+            StarPoints.style.top = randy + unitsA;
+
+            if (
+            //EXCLUDING LOGIN INPUT FIELD  
+            ((randx < (loginInputObject.offsetLeft ))
+            || (randy < (loginInputObject.offsetTop)) 
+            || (randx > (loginInputObject.offsetLeft + loginInputObject.offsetWidth))
+            || (randy > (loginInputObject.offsetTop + loginInputObject.offsetHeight + InputFieldsBoxObject.offsetTop))
+            )
+            
+            // EXCLUDING PASSW INPUT FIELD
+            && ((randx < (PasswInputObject.offsetLeft ))
+            || (randy < (PasswInputObject.offsetTop)) 
+            || (randx > (PasswInputObject.offsetLeft + PasswInputObject.offsetWidth))
+            || (randy > (PasswInputObject.offsetTop + PasswInputObject.offsetHeight + InputFieldsBoxObject.offsetTop))) 
+            )
+            {
+                LoginOuterBoxObject.appendChild(StarPoints);
+            }
+        }
+
+        MsgForDevelopment =() => {
+            alert('Dear User,\n\nFor website development please contact Administrator'+
+            ' Aidas by e-mail: amiedra@gmail.com\n\nThank you for your understanding.');
+        }
+
+        //HAMBURGER ON CLICK
+        const HamburgerObject = document.getElementsByClassName('Hamburger')[0];
+        const NavigationBarAreaObject  = document.getElementsByClassName('NavigationBarArea')[0];
+        const LabelCenterTopObject = document.getElementsByClassName('LabelCenterTop')[0];
+        HamburgerObject.onclick = () => {
+            HamburgerObject.classList.toggle('active');
+            NavigationBarAreaObject.classList.toggle('active');
+            LabelCenterTopObject.classList.toggle('active');
+        }
+
+        window.onload = () => {
+            setTimeout(function() {
+            LabelCenterTopObject.classList.add('hover-simulated');
+            }, 300);
+            setTimeout(function() { 
+                LabelCenterTopObject.classList.remove('hover-simulated');
+            }, 900);
+
+        }
+    
+    </script>
+    
+</body>
+</html>
