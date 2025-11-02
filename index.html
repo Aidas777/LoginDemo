@@ -6,6 +6,8 @@
     <title>Login to Amiedra</title>
     <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine"> -->
     <link href="https://fonts.googleapis.com/css2?family=Montez&family=Niconne" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Montez&display=swap" rel="stylesheet">
 </head>
 
 <style>
@@ -478,7 +480,7 @@
         background-color: rgb(59, 59, 102);
         box-shadow: 10px 10px 10px rgb(15, 16, 27);
 
-        border-radius: 0.8rem;
+        border-radius: 1.2rem;
         border: none;
 
         cursor: pointer;
@@ -502,7 +504,7 @@
         place-self: center;
 
         /* border-radius: 3rem; */
-        border-radius: 0.8rem;
+        border-radius: 1.2rem;
 
         font-size: 1.5rem;
         font-style: italic;
@@ -556,11 +558,23 @@
     }
 
     @media screen and (max-width: 1600px) {
+        .LabelCenterTop {
+            width: 50%;
+            margin-left: 25%;
+            margin-right: 25%;
+        }
+
         .LoginButtonsBox {
             width: 65%;
         }
     }
-    
+
+    /* @media screen and (max-width: 1500px) {
+
+            .LabelCenterTop {
+            width: 60%;
+        }
+    } */
 
     @media screen and (max-width: 1400px) {
         .loginInput {
@@ -582,6 +596,9 @@
     }
 
     @media screen and (max-width: 1200px) {
+        .NavigationBarLinksBox a {
+            font-size: 1.6rem;
+        }
         .LabelCenterTop {
             font-size: 5rem;
         }
@@ -659,8 +676,25 @@
         }
 
     }
+    
+    @media screen and (max-width: 920px) {
+            .NavigationBarLinksBox a {
+            font-size: 1.3rem;
+        }
+
+        .NavigationBarLinksBox {
+            width: 90%;
+            margin-left: 5%;
+            margin-right: auto;
+        }
+    }
 
     @media screen and (max-width: 800px) {
+        .NavigationBarLinksBox {
+            width: 90%;
+            margin-left: 5%;
+            margin-right: auto;
+        }
 
         .LoginOuterBox {
             max-width: 60%;
@@ -737,6 +771,7 @@
                 margin-top: 10px;
                 margin-bottom: 10px;
                 color: rgb(188, 188, 255);
+                font-size: 1.6rem;
 
                 &:hover {
                     .glow {
@@ -773,7 +808,7 @@
                 letter-spacing: -10px;
             }
             to {
-                letter-spacing: auto;
+                letter-spacing: normal;
             }
 
         }
@@ -913,11 +948,11 @@
     <nav class="NavigationBar">
         <div class="NavigationBarArea">
             <div class="NavigationBarLinksBox">
-                <a href="" onclick = MsgForDevelopment()>About us<div class="glow"></div></a>
-                <a href="" onclick = MsgForDevelopment()>Our Team<div class="glow"></div></a>
-                <a href="" onclick = MsgForDevelopment()>Services<div class="glow"></div></a>
-                <a href="" onclick = MsgForDevelopment()>Contacts<div class="glow"></div></a>
-                <a href="" class="Login" onclick = "alert('Dear User,\n\nYou already are on a login page.'+
+                <a class="AboutUsControl" href="#" onclick = MsgForDevelopment()>About us<div class='glow'></div></a>
+                <a class="OurTeamControl" href="#" onclick = MsgForDevelopment()>Our Team<div class="glow"></div></a>
+                <a class="ServicesControl" href="#" onclick = MsgForDevelopment()>Services<div class="glow"></div></a>
+                <a class="ContactsControl" href="#" onclick = MsgForDevelopment()>Contacts<div class="glow"></div></a>
+                <a class="LoginControl" href="#" class="Login" onclick = "alert('Dear User,\n\nYou already are on a login page.'+
                 '\n\nPlease enter login details.')">Login<div class="glow"></div></a>
             </div>
     
@@ -955,6 +990,7 @@
         <label class="LabelBottomRight"></label>
     </div>
     
+
     <script>
         //REFRESH PAGE
         window.onresize = () => {
@@ -998,8 +1034,8 @@
         
         for (i = 0; i <= PointsQty; i++) {
             
-            let randx = LoginOuterBoxObject.offsetWidth * Math.random();
-            let randy = LoginOuterBoxObject.offsetHeight * Math.random();
+            let RandX = LoginOuterBoxObject.offsetWidth * Math.random();
+            let RandY = LoginOuterBoxObject.offsetHeight * Math.random();
 
             StarPoints = document.createElement("div");
             StarPoints.className = "StarPoints";
@@ -1011,23 +1047,23 @@
             StarPoints.style.width = PointRadius + "px";
             StarPoints.style.backgroundColor = "white";
 
-            const unitsA="px";
-            StarPoints.style.left = randx + unitsA;
-            StarPoints.style.top = randy + unitsA;
+            const UnitsA="px";
+            StarPoints.style.left = RandX + UnitsA;
+            StarPoints.style.top = RandY + UnitsA;
 
             if (
             //EXCLUDING LOGIN INPUT FIELD  
-            ((randx < (loginInputObject.offsetLeft ))
-            || (randy < (loginInputObject.offsetTop)) 
-            || (randx > (loginInputObject.offsetLeft + loginInputObject.offsetWidth))
-            || (randy > (loginInputObject.offsetTop + loginInputObject.offsetHeight + InputFieldsBoxObject.offsetTop))
+            ((RandX < (loginInputObject.offsetLeft ))
+            || (RandY < (loginInputObject.offsetTop)) 
+            || (RandX > (loginInputObject.offsetLeft + loginInputObject.offsetWidth))
+            || (RandY > (loginInputObject.offsetTop + loginInputObject.offsetHeight + InputFieldsBoxObject.offsetTop))
             )
             
             // EXCLUDING PASSW INPUT FIELD
-            && ((randx < (PasswInputObject.offsetLeft ))
-            || (randy < (PasswInputObject.offsetTop)) 
-            || (randx > (PasswInputObject.offsetLeft + PasswInputObject.offsetWidth))
-            || (randy > (PasswInputObject.offsetTop + PasswInputObject.offsetHeight + InputFieldsBoxObject.offsetTop))) 
+            && ((RandX < (PasswInputObject.offsetLeft ))
+            || (RandY < (PasswInputObject.offsetTop)) 
+            || (RandX > (PasswInputObject.offsetLeft + PasswInputObject.offsetWidth))
+            || (RandY > (PasswInputObject.offsetTop + PasswInputObject.offsetHeight + InputFieldsBoxObject.offsetTop))) 
             )
             {
                 LoginOuterBoxObject.appendChild(StarPoints);
@@ -1036,14 +1072,16 @@
 
         MsgForDevelopment =() => {
             alert('Dear User,\n\nFor website development please contact Administrator'+
-            ' Aidas by e-mail: amiedra@gmail.com\n\nThank you for your understanding.');
+            ' Aidas by e-mail: amiedra@gmail.com\n\nThank you.');
         }
 
         //HAMBURGER ON CLICK
         const HamburgerObject = document.getElementsByClassName('Hamburger')[0];
         const NavigationBarAreaObject  = document.getElementsByClassName('NavigationBarArea')[0];
         const LabelCenterTopObject = document.getElementsByClassName('LabelCenterTop')[0];
+
         HamburgerObject.onclick = () => {
+
             HamburgerObject.classList.toggle('active');
             NavigationBarAreaObject.classList.toggle('active');
             LabelCenterTopObject.classList.toggle('active');
@@ -1058,9 +1096,161 @@
             }, 900);
 
         }
-    
+
+        //TEXT ARRAYS FOR LANGUAGE CHANGE
+        const LTMenuTextArray = {
+            LabelCenterTop : "Prisijunk prie Amiedra",
+            LabelCenterTopFont : "'Montez', cursive",
+            AboutUsControl : "Apie Mus",
+            OurTeamControl : "Mūsų Komanda",
+            ServicesControl : "Paslaugos",
+            ContactsControl : "Kontaktai",
+            LoginControl : "Prisijungti",
+            LoginInputPlaceHolder : "Įveskite loginą arba el.paštą",
+            PasswInputPlaceHolder : "Įveskite slaptažodį",
+            SubmitButton : "Jungtis",
+            RegistrateLink : "Registruotis"
+
+        };
+
+        const RUMenuTextArray = {
+            LabelCenterTop : "Вход в\u2000Amiedra",
+            LabelCenterTopFont : "'Great Vibes', cursive",
+            AboutUsControl : "О Нас",
+            OurTeamControl : "Наша Команда",
+            ServicesControl : "Услуги",
+            ContactsControl : "Контакты",
+            LoginControl : "Войти",
+            LoginInputPlaceHolder : "Введите логин или эл.почту",
+            PasswInputPlaceHolder : "Пожалуйста, введите пароль",
+            SubmitButton : "Войти",
+            RegistrateLink : "Регистрация"
+        };
+        
+
+        // PREPARATION FOR CLICK ON EN OR RU CONTROLS
+        let CounterOfPressedTimes = 0;
+        let AdditionalDivForGlowEffect = "<div class='glow'>";
+
+        const LTMenuControl = document.getElementsByClassName('LT')[0];
+        const RUMenuControl = document.getElementsByClassName('RU')[0];
+
+        const AboutUsControl = document.getElementsByClassName('AboutUsControl')[0];
+        const OurTeamControl = document.getElementsByClassName('OurTeamControl')[0];
+        const ServicesControl = document.getElementsByClassName('ServicesControl')[0];
+        const ContactsControl = document.getElementsByClassName('ContactsControl')[0];
+        const LoginControl = document.getElementsByClassName('LoginControl')[0];
+
+        // INPUT FIELDS
+        const LoginInputField = document.getElementsByClassName('loginInput')[0];
+        const PasswInputField = document.getElementsByClassName('PasswInput')[0];
+
+        //BUTTONS
+        const SubmitButton = document.getElementsByClassName('btnSubmit')[0];
+        const RegistrateLink = document.getElementsByClassName('LinkToRegistrate')[0];
+
+        // CENTER LABEL TEMP (INITIAL) VALUE and TEMP (INITIAL) FONT
+        let LabelCenterTopObjectTempValue = LabelCenterTopObject.innerHTML;
+        let LabelCenterTopFontTemp = getComputedStyle(LabelCenterTopObject)['font-family'];
+
+        // CONTRLOL TEMP (INITIAL) VALUES
+        let AboutUsControlTempValue = AboutUsControl.innerHTML;
+        let OurTeamControlTempValue = OurTeamControl.innerHTML;
+        let ServicesControlTempValue = ServicesControl.innerHTML;
+        let ContactsControlTempValue = ContactsControl.innerHTML;
+        let LoginControlTempValue = LoginControl.innerHTML;
+
+        let LoginInputFieldPlaceHolderTempValue = LoginInputField.placeholder;
+        let PasswInputFieldPlaceHolderTempValue = PasswInputField.placeholder;
+        
+        // BUTTONS TEMP (INITIAL) VALUES
+        let btnSubmitTempValue = SubmitButton.innerHTML;
+        let LinkToRegistrateTempValue = RegistrateLink.innerHTML;
+
+
+        // CLICK ON EN OR RU CONTROLS EVENTS
+        LTMenuControl.onclick = () => {
+            ChangeLanguage(LTMenuTextArray, "LT");
+        };
+        RUMenuControl.onclick = () => {
+            ChangeLanguage(RUMenuTextArray, "RU");
+        };
+
+        let MenuLangCurrent = "EN";
+
+        
+        function ChangeLanguage(MenuTextArray, MenuLang) {
+
+            LTMenuControl.innerHTML = "LT";
+            RUMenuControl.innerHTML = "RU";
+
+            if (MenuLangCurrent == "EN" || MenuLangCurrent == null) {
+                MenuLangCurrent = MenuLang;
+                CounterOfPressedTimes++
+            } else {
+                if (MenuLangCurrent != MenuLang) {
+                    MenuLangCurrent = MenuLang;
+                    CounterOfPressedTimes = 1;
+                } else {
+                    CounterOfPressedTimes++;
+                }
+            }
+
+            let LangControlsTempValue;
+            let LangControlPressed = document.getElementsByClassName(MenuLang)[0];
+
+            if (LangControlsTempValue != "EN") {
+                LangControlsTempValue = LangControlPressed.innerHTML;
+            }
+
+            if ( IsOdd(CounterOfPressedTimes) ) {
+
+                LabelCenterTopObject.innerHTML = MenuTextArray['LabelCenterTop'];
+                LabelCenterTopObject.style.fontFamily = MenuTextArray['LabelCenterTopFont'];
+
+                LangControlPressed.innerHTML = "EN";
+
+                AboutUsControl.innerHTML = MenuTextArray['AboutUsControl'] + AdditionalDivForGlowEffect;
+                OurTeamControl.innerHTML = MenuTextArray['OurTeamControl'] + AdditionalDivForGlowEffect;
+                ServicesControl.innerHTML = MenuTextArray['ServicesControl'] + AdditionalDivForGlowEffect;
+                ContactsControl.innerHTML = MenuTextArray['ContactsControl'] + AdditionalDivForGlowEffect;
+                LoginControl.innerHTML = MenuTextArray['LoginControl'] + AdditionalDivForGlowEffect;
+
+                LoginInputField.placeholder = MenuTextArray['LoginInputPlaceHolder'];
+                PasswInputField.placeholder = MenuTextArray['PasswInputPlaceHolder'];
+
+                SubmitButton.innerHTML = MenuTextArray['SubmitButton'];
+                RegistrateLink.innerHTML = MenuTextArray['RegistrateLink'];
+
+            } else {
+
+                LabelCenterTopObject.innerHTML = LabelCenterTopObjectTempValue;
+                LabelCenterTopObject.style.fontFamily = LabelCenterTopFontTemp;
+
+                LangControlPressed.innerHTML = LangControlsTempValue;
+
+                AboutUsControl.innerHTML = AboutUsControlTempValue;
+                OurTeamControl.innerHTML = OurTeamControlTempValue;
+                ServicesControl.innerHTML = ServicesControlTempValue;
+                ContactsControl.innerHTML = ContactsControlTempValue;
+                LoginControl.innerHTML = LoginControlTempValue;
+
+                LoginInputField.placeholder = LoginInputFieldPlaceHolderTempValue;
+                PasswInputField.placeholder = PasswInputFieldPlaceHolderTempValue;
+
+                SubmitButton.innerHTML = btnSubmitTempValue;
+                RegistrateLink.innerHTML = LinkToRegistrateTempValue;
+            }
+
+            window.onload();
+          
+        }
+
+        function IsOdd(n) {
+            return (n & 1 == 1);
+        }
+
     </script>
     
 </body>
-
 </html>
