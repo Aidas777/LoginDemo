@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login to Amiedra</title>
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine"> -->
     <link href="https://fonts.googleapis.com/css2?family=Montez&family=Niconne" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Montez&display=swap" rel="stylesheet">
@@ -23,19 +22,15 @@
         margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
-        /* background-color: rgb(24, 26, 44); */
-        background-color: rgb(15, 16, 27); /* SITAS */
-        /* background-image: linear-gradient(rgb(15, 16, 27), rgb(59, 64, 110)); */
+        background-color: rgb(15, 16, 27);
     }
 
     .NavigationBar {
         margin-top: 3px;
         position: relative;
-        /* height: 30px; */
         width: 100%;
         padding-top: 10px;
         padding-bottom: 10px;
-        /* background-color: blue; */
         border-radius: 1rem;
         box-shadow: inset 0 0 30px rgb(79, 86, 146);
         display: flex;
@@ -490,6 +485,7 @@
 
     .btnSubmit:hover {
         background-color: rgb(78, 57, 196);
+        text-shadow: 5px 5px 10px rgb(15, 16, 27);
         transition: ease-in 0.3s;
     }
 
@@ -503,7 +499,6 @@
 
         place-self: center;
 
-        /* border-radius: 3rem; */
         border-radius: 1.2rem;
 
         font-size: 1.5rem;
@@ -519,7 +514,7 @@
 
     .LinkToRegistrate:hover {
         background-color: rgb(78, 57, 196);
-        text-shadow: none;
+        text-shadow: 5px 5px 10px rgb(15, 16, 27);
         transition: ease-in 0.3s;
     }
 
@@ -535,18 +530,37 @@
 
     }
 
-    .LabelBottomRight {
+    .LabelsBottomRightBox {
+        display: flex;
+        position: absolute;
+        right: 1%;
+        bottom: 1%;
+        width: 20%;
+        height: 42px;
+    }
+
+    .LabelBottomRightCreator {
         display: flex;
         position: absolute;
         color: rgb(150, 150, 235);
         font-style: italic;
-        right: 2%;
-        bottom: 2%;
+        right: 0;
+        bottom: 50%;
         &:hover {
             transition: all 0.2s linear;
             text-shadow: 0 0 20px rgb(211, 211, 255);
             font-size: 1.4rem;
         }
+    }
+
+    .LabelBottomRightVersion {
+        display: flex;
+        position: absolute;
+        color: rgb(150, 150, 235);
+        font-size: 0.9rem;
+        font-style: italic;
+        right: 0;
+        bottom: 5%;
     }
 
     /*/// MEDIA ///   /// MEDIA ///   MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   */
@@ -569,13 +583,6 @@
         }
     }
 
-    /* @media screen and (max-width: 1500px) {
-
-            .LabelCenterTop {
-            width: 60%;
-        }
-    } */
-
     @media screen and (max-width: 1400px) {
         .loginInput {
             font-size: 1.5rem;
@@ -591,6 +598,10 @@
 
         .LoginButtonsBox {
             width: 70%;
+        }
+
+        .LabelsBottomRightBox {
+            width: 30%;
         }
 
     }
@@ -678,7 +689,7 @@
     }
     
     @media screen and (max-width: 920px) {
-            .NavigationBarLinksBox a {
+        .NavigationBarLinksBox a {
             font-size: 1.3rem;
         }
 
@@ -686,6 +697,10 @@
             width: 90%;
             margin-left: 5%;
             margin-right: auto;
+        }
+
+        .LabelsBottomRightBox {
+            width: 50%;
         }
     }
 
@@ -818,6 +833,13 @@
             display: flex;
         }
 
+        .LabelCenterTop {
+            font-size: 3.8rem;
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
         .LoginOuterBox {
             display: flex;
             position: relative;
@@ -866,11 +888,18 @@
             margin-right: 25%;
         }
 
-        .LabelBottomRight {
+        .LabelsBottomRightBox {
             width: 100%;
             right: unset;
             justify-content: center;
         }
+
+        .LabelBottomRightCreator, .LabelBottomRightVersion {
+            width: 100%;
+            right: unset;
+            justify-content: center;
+        }
+
     }
 
 
@@ -885,10 +914,10 @@
         }
 
         .LabelCenterTop {
-            width: 70%;
-            margin-left: 15%;
-            margin-right: 15%;
-            font-size: 4rem;
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+            font-size: 3.6rem;
             margin-top: 3vh;
 
         }
@@ -931,8 +960,8 @@
             margin-right: 10%;
         }
 
-        .LabelBottomRight {
-            top: 67%;
+        .LabelsBottomRightBox {
+            top: 70%;
         }
     }
 
@@ -987,7 +1016,10 @@
             This is login Demo page. Fully responsive.<br>Try to change browser's window size,<br>hover, press or place cursor on any of elements,<br>also try to change language or check on phone.
         </label>
         
-        <label class="LabelBottomRight"></label>
+        <div class="LabelsBottomRightBox">
+            <label class="LabelBottomRightCreator"></label>
+            <label class="LabelBottomRightVersion">Version: 2025.11.03</label>
+        </div>
     </div>
     
 
@@ -1000,7 +1032,7 @@
         }
 
         //REFRESH BOTTOM LABEL DATE IF CODE AT THE END IS ACTVATED (OTHERWISE DATE IS STATIC)
-        document.getElementsByClassName("LabelBottomRight")[0].innerHTML = "Created by Aidas (amiedra@gmail.com) 2025"; /*+ new Date().getFullYear();*/
+        document.getElementsByClassName("LabelBottomRightCreator")[0].innerHTML = "Created by Aidas (amiedra@gmail.com) 2025"; /*+ new Date().getFullYear();*/
 
         const loginInputObject = document.getElementsByClassName("loginInput")[0];
         const InputFieldsBoxObject = document.getElementsByClassName('InputFieldsBox')[0];
