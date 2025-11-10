@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montez&family=Niconne" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Marck+Script&family=Montez&display=swap" rel="stylesheet">
+
 </head>
 
 <style>
@@ -70,6 +71,17 @@
         }
     }
 
+    .LoginControl {
+        color: rgba(117, 117, 182, 0.6) !important;
+        &:hover {
+            /* pointer-events: none; */
+            .glow {
+                background-color: transparent !important;
+                transition: none !important;
+            }
+        }
+    }
+
     .glow {
         content: '';
         width: 10px;
@@ -127,6 +139,8 @@
         justify-content: center;
         justify-items: center;
         text-align: center;
+
+        cursor: pointer;
     }
 
     .rod, .rod:before, .rod:after {
@@ -180,6 +194,44 @@
         z-index: 2;
 
     }
+
+    #MsgBox {
+        width: 80%;
+        height: 46px;
+        top: 76px;
+        margin-left: 10%;
+        margin-right: 10%;
+        padding-top: 5px;
+        border-radius: 1rem;
+        text-align: center;
+        font-size: 1.3rem;
+        color: rgb(235, 150, 231);
+        /* color: rgb(150, 150, 235); */
+        background-color: rgba(250, 134, 196, 0.2);
+        /* background-color: rgba(191, 253, 232, 0.3); */
+        position: absolute;     
+        display: none;
+        &.FadeAway {
+            animation: fade-away 1s;
+            animation-delay: 4s;
+            animation-fill-mode: forwards ;
+        }
+    }
+
+    @keyframes fade-away {
+        0% {
+            opacity: 1;
+            display: block;
+        }
+        100% {
+            opacity: 0;
+            display: none;
+        }
+    }
+    
+
+        /* opacity: 0.3; */
+    
 
     .LoginContainer {
         display: flex;
@@ -443,6 +495,16 @@
         }
     }
 
+    /* #PassEyeBtn {
+        width: 30px;
+        height: 30px;
+        margin-left: -30px; 
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        background-color: transparent;
+    } */
+
     .LoginButtonsBox {
         position: relative;
         display: flex;
@@ -699,6 +761,13 @@
             margin-right: auto;
         }
 
+        #MsgBox {
+            top: 60px;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
         .LabelsBottomRightBox {
             width: 50%;
         }
@@ -727,6 +796,10 @@
             width: 14%;
         }
 
+        #MsgBox {
+            font-size: 1rem;
+        }
+
         .LabelCenterTop {
             width: 60%;
             margin-left: 20%;
@@ -753,6 +826,12 @@
         .LinkToRegistrate {
             font-size: 1.3rem;
             height: 60%;
+        }
+
+        .DemoLabelBottom {
+            width: 60%;
+            margin-left: 20%;
+            margin-right: 20%;
         }
     }
 
@@ -882,10 +961,10 @@
         }
 
         .DemoLabelBottom {
-            width: 50%;
+            width: 80%;
             bottom: 10%;
-            margin-left: 25%;
-            margin-right: 25%;
+            margin-left: 10%;
+            margin-right: 10%;
         }
 
         .LabelsBottomRightBox {
@@ -969,6 +1048,10 @@
         .LabelCenterTop {
             font-size: 3rem;
         }
+
+        .DemoLabelBottom {
+            font-size: 0.8rem;
+        }
     }
 
 </style>
@@ -977,25 +1060,27 @@
     <nav class="NavigationBar">
         <div class="NavigationBarArea">
             <div class="NavigationBarLinksBox">
-                <a class="AboutUsControl" href="#" onclick = MsgForDevelopment()>About us<div class='glow'></div></a>
-                <a class="OurTeamControl" href="#" onclick = MsgForDevelopment()>Our Team<div class="glow"></div></a>
-                <a class="ServicesControl" href="#" onclick = MsgForDevelopment()>Services<div class="glow"></div></a>
-                <a class="ContactsControl" href="#" onclick = MsgForDevelopment()>Contacts<div class="glow"></div></a>
-                <a class="LoginControl" href="#" class="Login" onclick = "alert('Dear User,\n\nYou already are on a login page.'+
-                '\n\nPlease enter login details.')">Login<div class="glow"></div></a>
+                <a class="AboutUsControl" href="#" onclick = "Controller(this.className , 'ShowMsg')">About us<div class='glow'></div></a>
+                <a class="OurTeamControl" href="#" onclick = "Controller(this.className , 'ShowMsg')">Our Team<div class="glow"></div></a>
+                <a class="ServicesControl" href="#" onclick = "Controller(this.className , 'ShowMsg')">Services<div class="glow"></div></a>
+                <a class="ContactsControl" href="#" onclick = "Controller(this.className , 'ShowMsg')">Contacts<div class="glow"></div></a>
+                <a class="LoginControl" href="#" onclick = "Controller(this.className , 'ShowMsg')">Login<div class="glow"></div></a>
             </div>
     
             <div class="Languages">
-                <span class="LT">LT</span>
-                <span class="RU">RU</span>
+                <span class="LT" onclick = "Controller(this.className , 'ChangeLanguage')">LT</span>
+                <span class="RU" onclick = "Controller(this.className , 'ChangeLanguage')">RU</span>
             </div>
         </div>
 
-        <button class="Hamburger">
+        <button class="Hamburger" onclick = "Controller(this.className)">
             <span class="rod"></span>
         </button>
 
     </nav>
+
+
+    <div id="MsgBox"></div>
 
     <div class="LoginContainer">
         <label class="LabelCenterTop">Login to Amiedra</label>
@@ -1003,22 +1088,30 @@
         <div class="LoginOuterBox">
             <div class="InputFieldsBox">
                 <input class="loginInput" placeholder="Please enter your login or e-mail"></input>
-                <input class="PasswInput" placeholder="Please enter password" type='password'></input>
+                
+                <input class="PasswInput" placeholder="Please enter password" type='password' onmousedown="Controller(this.className, 'ShowPass')" onmouseup="Controller(this.className, 'HidePass')">
+                </input>
+                
             </div>
 
             <div class="LoginButtonsBox">
-                <button class="btnSubmit" type="submit" method = "Post">Login</button>
-                <a href="" target = "_self" class="LinkToRegistrate" onclick=MsgForDevelopment()>or register</a>
+                <button class="btnSubmit" type="submit" method = "Post" onclick="Controller(this.className , 'LoginAction')">Login</button>
+                <a href="#" class="LinkToRegistrate" onclick="Controller(this.className , 'ShowMsg')">or register</a>
             </div>
         </div>
 
         <label class="DemoLabelBottom">
-            This is login Demo page. Fully responsive.<br>Try to change browser's window size,<br>hover, press or place cursor on any of elements,<br>also try to change language or check on phone.
+            This is login Demo page. Fully responsive.<br>Try to change browser's window size,<br>hover, press or place cursor on any of elements,
+            <br>also try to change language or check on phone.<br>Each day we learn something new.
         </label>
+
+        <!-- <label class="WiseLabelBottom">
+            Each day we are learning something new. Even if we are moving back.
+        </label> -->
         
         <div class="LabelsBottomRightBox">
             <label class="LabelBottomRightCreator"></label>
-            <label class="LabelBottomRightVersion">Version: 2025.11.03</label>
+            <label class="LabelBottomRightVersion">Version: 2025.11.10</label>
         </div>
     </div>
     
@@ -1031,6 +1124,7 @@
             }
         }
 
+        
         //REFRESH BOTTOM LABEL DATE IF CODE AT THE END IS ACTVATED (OTHERWISE DATE IS NOT DISPLAYED)
         document.getElementsByClassName("LabelBottomRightCreator")[0].innerHTML = "Created by Aidas (amiedra@gmail.com)"; /*+ new Date().getFullYear();*/
 
@@ -1039,86 +1133,124 @@
         const PasswInputObject = document.getElementsByClassName("PasswInput")[0];
         const BtnSubmitObject = document.getElementsByClassName("btnSubmit")[0];
 
-        //LOGIN BUTTONS ACTIONS
-        BtnSubmitObject.addEventListener("click", () => 
-        {
-            if (loginInputObject.value !== "" && PasswInputObject.value !== "")
-            {
-                if (loginInputObject.value.length < 5 || PasswInputObject.value.length < 5) {
-                alert("Dear User,\n\nLogin, e-mail or password is too short !\n\nPlease enter longer.");
-                BtnSubmitObject.innerHTML = "Login";
-                } else {
-                BtnSubmitObject.innerHTML = "You're logged in";
-                }
-            } else {    
-                BtnSubmitObject.innerHTML = "Login";
-                alert("Dear User,\n\nPlease enter login or e-mail and password !");
-            }
-        }
-        );
-
-        //STARS GENERATOR
-        const NavigationBarObject = document.getElementsByClassName('NavigationBar')[0];
-        const LoginOuterBoxObject = document.getElementsByClassName('LoginOuterBox')[0];
-
-        //STAR POINTS QUANTITY
-        const PointsQty = 200;
-        
-        for (i = 0; i <= PointsQty; i++) {
-            
-            let RandX = LoginOuterBoxObject.offsetWidth * Math.random();
-            let RandY = LoginOuterBoxObject.offsetHeight * Math.random();
-
-            StarPoints = document.createElement("div");
-            StarPoints.className = "StarPoints";
-            StarPoints.style.position = "absolute";
-
-            let PointRadius = Math.random() * 3;
-
-            StarPoints.style.height = PointRadius + "px";
-            StarPoints.style.width = PointRadius + "px";
-            StarPoints.style.backgroundColor = "white";
-
-            const UnitsA="px";
-            StarPoints.style.left = RandX + UnitsA;
-            StarPoints.style.top = RandY + UnitsA;
-
-            if (
-            //EXCLUDING LOGIN INPUT FIELD  
-            ((RandX < (loginInputObject.offsetLeft ))
-            || (RandY < (loginInputObject.offsetTop)) 
-            || (RandX > (loginInputObject.offsetLeft + loginInputObject.offsetWidth))
-            || (RandY > (loginInputObject.offsetTop + loginInputObject.offsetHeight + InputFieldsBoxObject.offsetTop))
-            )
-            
-            // EXCLUDING PASSW INPUT FIELD
-            && ((RandX < (PasswInputObject.offsetLeft ))
-            || (RandY < (PasswInputObject.offsetTop)) 
-            || (RandX > (PasswInputObject.offsetLeft + PasswInputObject.offsetWidth))
-            || (RandY > (PasswInputObject.offsetTop + PasswInputObject.offsetHeight + InputFieldsBoxObject.offsetTop))) 
-            )
-            {
-                LoginOuterBoxObject.appendChild(StarPoints);
-            }
-        }
-
-        MsgForDevelopment =() => {
-            alert('Dear User,\n\nFor website development please contact Administrator'+
-            ' Aidas by e-mail: amiedra@gmail.com\n\nThank you.');
-        }
-
-        //HAMBURGER ON CLICK
-        const HamburgerObject = document.getElementsByClassName('Hamburger')[0];
+        const HamburgerControl = document.getElementsByClassName('Hamburger')[0];
         const NavigationBarAreaObject  = document.getElementsByClassName('NavigationBarArea')[0];
         const LabelCenterTopObject = document.getElementsByClassName('LabelCenterTop')[0];
 
-        HamburgerObject.onclick = () => {
+        const MsgBoxObject = document.getElementById('MsgBox');
 
-            HamburgerObject.classList.toggle('active');
+        const StarsQty = 200;
+        document.onload = Controller('Document', 'GenerateStars');
+
+        function GenerateStars(StarsQty) {
+            
+            const NavigationBarObject = document.getElementsByClassName('NavigationBar')[0];
+            const LoginOuterBoxObject = document.getElementsByClassName('LoginOuterBox')[0];
+
+            const UnitsPx = "px";
+            
+            for (i = 0; i <= StarsQty; i++) {
+                
+                let RandX = LoginOuterBoxObject.offsetWidth * Math.random();
+                let RandY = LoginOuterBoxObject.offsetHeight * Math.random();
+
+                StarPoints = document.createElement("div");
+                StarPoints.className = "StarPoints";
+                StarPoints.style.position = "absolute";
+
+                let PointRadius = Math.random() * 3;
+
+                StarPoints.style.height = PointRadius + UnitsPx;
+                StarPoints.style.width = PointRadius + UnitsPx;
+                StarPoints.style.backgroundColor = "white";
+
+                StarPoints.style.left = RandX + UnitsPx;
+                StarPoints.style.top = RandY + UnitsPx;
+
+                if (
+                //EXCLUDING LOGIN INPUT FIELD  
+                ((RandX < (loginInputObject.offsetLeft ))
+                || (RandY < (loginInputObject.offsetTop)) 
+                || (RandX > (loginInputObject.offsetLeft + loginInputObject.offsetWidth))
+                || (RandY > (loginInputObject.offsetTop + loginInputObject.offsetHeight + InputFieldsBoxObject.offsetTop))
+                )
+                
+                // EXCLUDING PASSW INPUT FIELD
+                && ((RandX < (PasswInputObject.offsetLeft ))
+                || (RandY < (PasswInputObject.offsetTop)) 
+                || (RandX > (PasswInputObject.offsetLeft + PasswInputObject.offsetWidth))
+                || (RandY > (PasswInputObject.offsetTop + PasswInputObject.offsetHeight + InputFieldsBoxObject.offsetTop))) 
+                )
+                {
+                    LoginOuterBoxObject.appendChild(StarPoints);
+                }
+            }
+        }
+
+        /// CONTROLLER /// /// CONTROLLER ////// CONTROLLER ////// CONTROLLER ////// CONTROLLER ////// CONTROLLER ////// CONTROLLER ////// CONTROLLER ////// CONTROLLER ////// CONTROLLER ////// CONTROLLER ///
+        function Controller(ControlName, ActionName) {
+            
+
+            if (ControlName != 'LoginControl' && ActionName == 'ShowMsg') {
+                ShowMsg(GetTranslationsArrayByCurrentLanguage()['MsgTexts']['ForDevelopment'], ColorRed);
+                
+            } else if (ControlName == 'LoginControl' && ActionName == 'ShowMsg') {
+                ShowMsg(GetTranslationsArrayByCurrentLanguage()['MsgTexts']['AlreadyOnLoginPage'], ColorRed);
+
+            } else if (ControlName == 'btnSubmit' && ActionName == 'LoginAction') {
+                LoginAction();
+
+            } else if (ControlName == 'PasswInput' && ActionName == 'ShowPass') {
+                    PasswInputObject.type = 'text';
+
+            } else if (ControlName == 'PasswInput' && ActionName == 'HidePass') {
+                    PasswInputObject.type = 'password';
+
+            } else if (ControlName == 'Document' && ActionName == 'GenerateStars') {
+                GenerateStars(StarsQty);
+
+            // CLICK ON EN OR RU CONTROLS EVENTS
+            } else if (ControlName == 'LT' && ActionName == 'ChangeLanguage') {
+                console.log(NavigationBarAreaObject.className);
+                
+                ChangeTitlesByLanguage(StringsForLanguageChangeToLT['Titles'], "LT");
+                MsgBoxObject.style.display = "none";
+
+            } else if (ControlName == 'RU' && ActionName == 'ChangeLanguage')  {
+                ChangeTitlesByLanguage(StringsForLanguageChangeToRU['Titles'], "RU");
+                MsgBoxObject.style.display = "none";
+            }
+
+            
+            // AFTER CLICK ON HAMBURGER MENU ITEM WE CLOSE HAMBURGER MENU IF IT WAS OPEN
+            if ((NavigationBarAreaObject.className == 'NavigationBarArea active') && (ControlName != 'LT' && ControlName != 'RU' && ControlName != 'EN')) {
+                NavigationBarAreaObject.classList.remove('active');
+            }
+
+            if ((HamburgerControl.className == 'Hamburger active') && (ControlName != 'LT' && ControlName != 'RU' && ControlName != 'EN')) {
+                HamburgerControl.classList.remove('active');
+            }
+
+            if (LabelCenterTopObject.className == 'LabelCenterTop active') {
+                LabelCenterTopObject.classList.remove('active');
+            }
+
+
+            //HAMBURGER OPEN MENU
+            if (ControlName == 'Hamburger') {
+                OpenHamburgerMenu();
+            }
+        }
+        
+        //HAMBURGER ON CLICK
+        function OpenHamburgerMenu() {
+
+            HamburgerControl.classList.toggle('active');
             NavigationBarAreaObject.classList.toggle('active');
             LabelCenterTopObject.classList.toggle('active');
         }
 
+        // CENTER TOP LABEL GLOW ON PAGE LOAD
         window.onload = () => {
             setTimeout(function() {
             LabelCenterTopObject.classList.add('hover-simulated');
@@ -1129,37 +1261,7 @@
 
         }
 
-        //TEXT ARRAYS FOR LANGUAGE CHANGE
-        const LTMenuTextArray = {
-            LabelCenterTop : "Prisijunk prie Amiedra",
-            LabelCenterTopFont : "'Montez', cursive",
-            AboutUsControl : "Apie Mus",
-            OurTeamControl : "Mūsų Komanda",
-            ServicesControl : "Paslaugos",
-            ContactsControl : "Kontaktai",
-            LoginControl : "Prisijungti",
-            LoginInputPlaceHolder : "Įveskite loginą arba el.paštą",
-            PasswInputPlaceHolder : "Įveskite slaptažodį",
-            SubmitButton : "Jungtis",
-            RegistrateLink : "Registruotis"
-
-        };
-
-        const RUMenuTextArray = {
-            LabelCenterTop : "Вход в\u2000Amiedra",
-            LabelCenterTopFont : "'Great Vibes', cursive",
-            AboutUsControl : "О Нас",
-            OurTeamControl : "Наша Команда",
-            ServicesControl : "Услуги",
-            ContactsControl : "Контакты",
-            LoginControl : "Войти",
-            LoginInputPlaceHolder : "Введите логин или эл.почту",
-            PasswInputPlaceHolder : "Пожалуйста, введите пароль",
-            SubmitButton : "Войти",
-            RegistrateLink : "Регистрация"
-        };
-        
-
+        /// LANGUAGE CHANGE ///
         // PREPARATION FOR CLICK ON EN OR RU CONTROLS
         let CounterOfPressedTimes = 0;
         let AdditionalDivForGlowEffect = "<div class='glow'>";
@@ -1181,11 +1283,12 @@
         const SubmitButton = document.getElementsByClassName('btnSubmit')[0];
         const RegistrateLink = document.getElementsByClassName('LinkToRegistrate')[0];
 
+        /// TEMP (INITIAL) VALUES ///
         // CENTER LABEL TEMP (INITIAL) VALUE and TEMP (INITIAL) FONT
         let LabelCenterTopObjectTempValue = LabelCenterTopObject.innerHTML;
         let LabelCenterTopFontTemp = getComputedStyle(LabelCenterTopObject)['font-family'];
 
-        // CONTRLOL TEMP (INITIAL) VALUES
+        // CONTROLS TEMP (INITIAL) VALUES
         let AboutUsControlTempValue = AboutUsControl.innerHTML;
         let OurTeamControlTempValue = OurTeamControl.innerHTML;
         let ServicesControlTempValue = ServicesControl.innerHTML;
@@ -1199,24 +1302,14 @@
         let btnSubmitTempValue = SubmitButton.innerHTML;
         let LinkToRegistrateTempValue = RegistrateLink.innerHTML;
 
-
-        // CLICK ON EN OR RU CONTROLS EVENTS
-        LTMenuControl.onclick = () => {
-            ChangeLanguage(LTMenuTextArray, "LT");
-        };
-        RUMenuControl.onclick = () => {
-            ChangeLanguage(RUMenuTextArray, "RU");
-        };
-
         let MenuLangCurrent = "EN";
-
         
-        function ChangeLanguage(MenuTextArray, MenuLang) {
+        function ChangeTitlesByLanguage(MenuTextArray, MenuLang) {
 
             LTMenuControl.innerHTML = "LT";
             RUMenuControl.innerHTML = "RU";
 
-            if (MenuLangCurrent == "EN" || MenuLangCurrent == null) {
+            if (MenuLangCurrent == "EN") {
                 MenuLangCurrent = MenuLang;
                 CounterOfPressedTimes++
             } else {
@@ -1235,7 +1328,7 @@
                 LangControlsTempValue = LangControlPressed.innerHTML;
             }
 
-            if ( IsOdd(CounterOfPressedTimes) ) {
+            if ( IsNumberOdd(CounterOfPressedTimes) ) {
 
                 LabelCenterTopObject.innerHTML = MenuTextArray['LabelCenterTop'];
                 LabelCenterTopObject.style.fontFamily = MenuTextArray['LabelCenterTopFont'];
@@ -1278,8 +1371,197 @@
           
         }
 
-        function IsOdd(n) {
+        //LOGIN BUTTONS ACTIONS
+        function LoginAction() 
+        { 
+            let MsgTemp;
+
+            if (AreLoginAndPassAccepted() == "yes") {
+
+                MsgTemp = GetTranslationsArrayByCurrentLanguage()['Titles']['SubmitButtonLogedIn'];
+                ShowMsg(MsgTemp, ColorGreen);
+                BtnSubmitObject.innerHTML = MsgTemp;
+
+
+            } else if (AreLoginAndPassAccepted() == "no") {
+                MsgTemp = GetTranslationsArrayByCurrentLanguage()['MsgTexts']['LoginOrPassTooShort'];
+                ShowMsg(MsgTemp, ColorRed);
+                BtnSubmitObject.innerHTML = GetTranslationsArrayByCurrentLanguage()['Titles']['SubmitButton'];
+
+            } else {    
+
+                MsgTemp = GetTranslationsArrayByCurrentLanguage()['MsgTexts']['EnterLoginAndPass'];
+                ShowMsg(MsgTemp, ColorRed);
+                BtnSubmitObject.innerHTML = GetTranslationsArrayByCurrentLanguage()['Titles']['SubmitButton'];
+            }
+        }
+
+        function AreLoginAndPassAccepted() {
+
+            if (loginInputObject.value != "" && PasswInputObject.value != "") {
+
+                if (loginInputObject.value.length < 5 || PasswInputObject.value.length < 5) {
+                    return "no";
+                } else {
+                    return "yes";
+                }
+            } else {    
+                return;
+            }
+        }
+
+        function GetTranslationsArrayByCurrentLanguage() 
+        {
+            if (LTMenuControl.innerHTML == "EN") {
+                // MsgTextArray = MsgTextArrayLT;
+                // return "LT";
+                return StringsForLanguageChangeToLT;
+
+            } else if (RUMenuControl.innerHTML == "EN") {
+                // MsgTextArray = MsgTextArrayRU;
+                // return "RU";
+                return StringsForLanguageChangeToRU;
+            } else {
+                // MsgTextArray = MsgTextArrayEN;
+                // return "EN";
+                return StringsForLanguageChangeToEN;
+            }
+        }
+
+        function IsNumberOdd(n) {
             return (n & 1 == 1);
+        }
+
+        function ShowMsg(Msg, MsgColor) {
+
+            // const MsgBoxObject = document.getElementById("MsgBox");
+            
+            // if (LTMenuControl.innerHTML == "EN") {
+            //     // MsgTextArray = MsgTextArrayLT;
+            //     MsgTextArray = StringsForLanguageChangeToLT['MsgTexts'];
+            // } else if (RUMenuControl.innerHTML == "EN") {
+            //     MsgTextArray = MsgTextArrayRU;
+            // } else {
+            //     MsgTextArray = MsgTextArrayEN;
+            // }
+
+            // MsgBoxObject.innerHTML = MsgTextArray[Msg];
+            MsgBoxObject.innerHTML = Msg;
+            MsgBoxObject.style.display = 'block';
+
+            if (MsgColor) {
+                MsgBoxObject.style.color  = MsgColor['FontColor'];
+                MsgBoxObject.style.backgroundColor = MsgColor['BackColor'];
+            }
+            MsgBoxObject.setAttribute("class", "FadeAway");
+
+            setTimeout(function() {
+                MsgBoxObject.style.display = 'none';
+                MsgBoxObject.removeAttribute("class", "FadeAway");
+            }, 5100)
+        }
+
+        //TEXT ARRAYS FOR LANGUAGE CHANGE
+        const StringsForLanguageChangeToLT = {
+            Titles : {
+
+                LabelCenterTop : "Prisijunk prie Amiedra",
+                LabelCenterTopFont : "'Montez', cursive",
+                AboutUsControl : "Apie Mus",
+                OurTeamControl : "Mūsų Komanda",
+                ServicesControl : "Paslaugos",
+                ContactsControl : "Kontaktai",
+                LoginControl : "Prisijungti",
+                LoginInputPlaceHolder : "Įveskite loginą arba el.paštą",
+                PasswInputPlaceHolder : "Įveskite slaptažodį",
+                SubmitButton : "Jungtis",
+                SubmitButtonLogedIn : "Prisijungta",
+                RegistrateLink : "Registruotis"},
+            
+            MsgTexts : {
+                ForDevelopment : 
+                "Mielas vartotojau,<br>Dėl svetainės plėtros prašome susisiekti su Administratoriumi"+
+                " Aidu el.paštu: amiedra@gmail.com. Ačiū.",
+
+                AlreadyOnLoginPage :
+                 "Mielas vartotojau,<br>Jūs jau esate prisijungimo puslapyje."+
+                " Prašome įveskite prisijungimo duomenis.",
+
+                LoginOrPassTooShort : "Mielas vartotojau,<br>Nurodytas loginas, el.paštas" + 
+                " arba slaptažodis yra per trumpi ! Prašom nurodyti daugiau simbolių.",
+
+                EnterLoginAndPass : "Mielas vartotojau,<br>Prašom, nurodykite loginą arba el.paštą ir slaptažodį."
+            }
+        }
+
+        const StringsForLanguageChangeToRU = {
+            Titles : {
+
+                LabelCenterTop : "Вход в\u2000Amiedra",
+                LabelCenterTopFont : "'Great Vibes', cursive",
+                AboutUsControl : "О Нас",
+                OurTeamControl : "Наша Команда",
+                ServicesControl : "Услуги",
+                ContactsControl : "Контакты",
+                LoginControl : "Войти",
+                LoginInputPlaceHolder : "Введите логин или эл.почту",
+                PasswInputPlaceHolder : "Пожалуйста, введите пароль",
+                SubmitButton : "Войти",
+                SubmitButtonLogedIn : "Вы вошли",
+                RegistrateLink : "Регистрация"},
+
+            MsgTexts : {
+                ForDevelopment : "Уважаемый пользователь,<br>По вопросам разработки сайта обращайтесь к Администратору" + 
+                " Айдасу по электронной почте: amiedra@gmail.com. Спасибо.",
+
+                AlreadyOnLoginPage : "Уважаемый пользователь,<br>Вы уже находитесь на странице входа."+
+                " Пожалуйста, введите данные, чтобы присоединиться.",
+
+                LoginOrPassTooShort : "Уважаемый пользователь,<br>Указанный логин, адрес эл.почты" +
+                " или пароль слишком короткий! Пожалуйста, укажите больше символов.",
+
+                EnterLoginAndPass : "Уважаемый пользователь,<br>Укажите, пожалуйста, ваш логин или адрес эл.почты и пароль."
+            }
+        }
+
+        const StringsForLanguageChangeToEN = {
+            Titles : {
+
+                // LabelCenterTop : "EN Prisijunk prie Amiedra",
+                // LabelCenterTopFont : "'Montez', cursive",
+                // AboutUsControl : "EN Apie Mus",
+                // OurTeamControl : "EN Mūsų Komanda",
+                // ServicesControl : "EN Paslaugos",
+                // ContactsControl : "EN Kontaktai",
+                // LoginControl : "EN Prisijungti",
+                // LoginInputPlaceHolder : "EN Įveskite loginą arba el.paštą",
+                // PasswInputPlaceHolder : "EN Įveskite slaptažodį",
+                SubmitButton : "Login",
+                SubmitButtonLogedIn : "You're loged in",
+                RegistrateLink : "or register"},
+            
+            MsgTexts : {
+                ForDevelopment : "Dear User,<br>For website development please contact Administrator"+
+                " Aidas by e-mail: amiedra@gmail.com. Thank you.",
+
+                AlreadyOnLoginPage : "Dear User,<br>You already are on a login page."+
+                " Please enter login details.",
+            
+                LoginOrPassTooShort : "Dear user,<br>Login, e-mail or password is too short ! Please enter longer.",
+
+                EnterLoginAndPass : "Dear user,<br>Please, enter login, e-mail and password."
+            }
+        }
+
+        //MESSAGE COLORS
+        const ColorGreen = {
+            FontColor : 'rgb(176, 255, 248)',
+            BackColor : 'rgba(77, 109, 144, 0.41)'
+        }
+
+        const ColorRed = {
+            FontColor : 'rgb(235, 150, 231)',
+            BackColor : 'rgba(250, 134, 196, 0.2)'
         }
 
     </script>
