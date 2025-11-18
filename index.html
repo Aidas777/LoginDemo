@@ -625,6 +625,18 @@
         bottom: 5%;
     }
 
+        .LabelsBottomLeftBox {
+        display: flex;
+        position: absolute;
+        left: 1%;
+        bottom: 0;
+        width: 20%;
+        height: 42px;
+        color: rgb(150, 150, 235);
+        font-style: italic;
+        font-size: 0.8rem;
+    }
+
     /*/// MEDIA ///   /// MEDIA ///   MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   /// MEDIA ///   */
 
     @media screen and (max-width: 1900px) {
@@ -1099,7 +1111,8 @@
             <div class="InputFieldsBox">
                 <input class="loginInput" placeholder="Please enter your login or e-mail"></input>
                 
-                <input class="PasswInput" placeholder="Please enter password" type='password' onmousedown="Controller(this.className, 'ShowPass')" onmouseup="Controller(this.className, 'HidePass')">
+                <input class="PasswInput" placeholder="Please enter password" type ='password' onmousedown ="Controller(this.className, 'ShowPass')"
+                    onmouseup = "Controller(this.className, 'HidePass')" ontouchstart = "Controller(this.className, 'ShowPass')" ontouchcancel = "Controller(this.className, 'HidePass')">
                 </input>
                 
             </div>
@@ -1121,8 +1134,12 @@
         
         <div class="LabelsBottomRightBox">
             <label class="LabelBottomRightCreator"></label>
-            <label class="LabelBottomRightVersion">Version: 2025.11.16</label>
+            <label class="LabelBottomRightVersion">Version: 2025.11.18</label>
         </div>
+
+        <!-- <div class="LabelsBottomLeftBox">
+            I am everywhere, but you won't see me.<br>I dwell inside you. Rumi.
+        </div> -->
     </div>
     
 
@@ -1219,6 +1236,9 @@
                     PasswInputObject.type = 'text';
 
             } else if (ControlName == 'PasswInput' && ActionName == 'HidePass') {
+                    // let PasswLenth = PasswInputObject.value.length
+                    // // PasswInputObject.selectionStart = PasswInputObject.value.length;
+                    // PasswInputObject.setSelectionRange(PasswLenth, PasswLenth);
                     PasswInputObject.type = 'password';
 
             } else if (ControlName == 'Document' && ActionName == 'GenerateStars') {
