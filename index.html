@@ -26,6 +26,10 @@
         background-color: rgb(15, 16, 27);
     }
 
+    ::placeholder {
+        color: rgba(150, 150, 235, 0.6);
+    }
+
     .NavigationBar {
         margin-top: 3px;
         position: relative;
@@ -39,6 +43,29 @@
     .NavigationBarArea {
         display: flex;
         width: 100%;
+    }
+
+    .MenuLabel {
+        width: 50px;
+        font-size: 1.4rem;
+        color: rgba(150, 150, 235, 0.6);
+        text-decoration: none;
+        place-content: center;
+        position: absolute;
+        cursor: pointer;
+
+        display: none;
+
+        &:hover {
+            color: rgb(191, 191, 253);
+                transition: all 0.3s ease;
+                text-shadow: 0 0 20px rgb(211, 211, 255);
+                /* font-weight: 700; */
+        }
+    }
+
+    .MenuLabel.active {
+        color: rgb(191, 191, 253);
     }
 
     .NavigationBarLinksBox {
@@ -201,9 +228,10 @@
         top: 76px;
         margin-left: 10%;
         margin-right: 10%;
-        padding-top: 5px;
+        /* padding-top: 5px; */
         border-radius: 1rem;
         text-align: center;
+        place-content: center;
         font-size: 1.3rem;
         color: rgb(235, 150, 231);
         /* color: rgb(150, 150, 235); */
@@ -632,7 +660,7 @@
         bottom: 0;
         width: 20%;
         height: 42px;
-        color: rgb(150, 150, 235);
+        color: rgba(150, 150, 235, 0.6);
         font-style: italic;
         font-size: 0.8rem;
     }
@@ -855,6 +883,13 @@
             display: none;
         }
 
+        .MenuLabel {
+            display: flex;
+            position: fixed;
+            right: 56px;
+            margin-top: 5px;
+        }
+
         .NavigationBarArea.active {
             border-radius: 10px;
 
@@ -979,10 +1014,16 @@
             margin-right: 10%;
         }
 
+        .LabelsBottomLeftBox {
+            font-size: 0.7rem;
+
+        }
+
         .LabelsBottomRightBox {
             width: 100%;
             right: unset;
             justify-content: center;
+            bottom: 20px;
         }
 
         .LabelBottomRightCreator, .LabelBottomRightVersion {
@@ -1014,8 +1055,9 @@
         }
 
         .LoginOuterBox {
-            max-height: 35%;
-            top:15%
+            max-height: 37%;
+            top:15%;
+            clip-path: ellipse(70% 50%);
         }
 
         .InputFieldsBox {
@@ -1056,14 +1098,32 @@
             margin-right: 10%;
         }
 
+        .LabelsBottomLeftBox {
+            justify-content: center;
+            width: 100%;
+            left: unset;
+            text-align: center;
+
+        }
+
         .LabelsBottomRightBox {
-            top: 70%;
+            top: 69%;
+            height: 26px;
+        }
+
+        .LabelBottomRightCreator {
+            font-size: 0.8rem;
+        }
+
+        .LabelBottomRightVersion {
+            font-size: 0.6rem;
         }
     }
 
     @media screen and (max-width: 376px) {
 
         body {
+            height: 90vh;
             min-height: 600px;
         }
 
@@ -1075,8 +1135,23 @@
             margin-top: 4vh;
         }
 
+        .LoginButtonsBox {
+            margin-top: 6%;
+        }
+
         .DemoLabelBottom {
             font-size: 0.8rem;
+            top: 55%;
+        }
+
+        .LabelsBottomRightBox {
+            height: 22px;
+        }
+
+        .LabelsBottomLeftBox {
+            height: 28px;
+            top: 76%;
+            font-size: 0.6rem;
         }
     }
 
@@ -1084,6 +1159,7 @@
 <body>
     
     <nav class="NavigationBar">
+        <div class="MenuLabel" onclick = "Controller('MenuLabel')">Menu</div>
         <div class="NavigationBarArea">
             <div class="NavigationBarLinksBox">
                 <a class="AboutUsControl" href="#" onclick = "Controller(this.className , 'ShowMsg')">About us<div class='glow'></div></a>
@@ -1128,22 +1204,18 @@
         </div>
 
         <label class="DemoLabelBottom">
-            This is login Demo page. Fully responsive.<br>Try to change browser's window size,<br>hover, press or place cursor on any of elements,
+            This is a login Demo page. Fully responsive.<br>Try to change browser's window size,<br>hover, press or place cursor on any of elements,
             <br>also try to change language or check on phone.<br>Each day we learn something new.
         </label>
 
-        <!-- <label class="WiseLabelBottom">
-            Each day we are learning something new. Even if we are moving back.
-        </label> -->
-        
         <div class="LabelsBottomRightBox">
             <label class="LabelBottomRightCreator"></label>
-            <label class="LabelBottomRightVersion">Version: 2025.11.19</label>
+            <label class="LabelBottomRightVersion">Version: 2025.11.23</label>
         </div>
 
-        <!-- <div class="LabelsBottomLeftBox">
-            I am everywhere, but you won't see me.<br>I dwell inside you. Rumi.
-        </div> -->
+        <div class="LabelsBottomLeftBox">
+            I am everywhere, but you won't see me.<br>I dwell inside your Heart. Rumi.
+        </div>
     </div>
     
 
@@ -1164,6 +1236,7 @@
         const PasswInputObject = document.getElementsByClassName("PasswInput")[0];
         const BtnSubmitObject = document.getElementsByClassName("btnSubmit")[0];
 
+        const MenuLabelObject = document.getElementsByClassName('MenuLabel')[0];
         const HamburgerControl = document.getElementsByClassName('Hamburger')[0];
         const NavigationBarAreaObject  = document.getElementsByClassName('NavigationBarArea')[0];
         const LabelCenterTopObject = document.getElementsByClassName('LabelCenterTop')[0];
@@ -1250,7 +1323,6 @@
 
             // CLICK ON EN OR RU CONTROLS EVENTS
             } else if (ControlName == 'LT' && ActionName == 'ChangeLanguage') {
-                console.log(NavigationBarAreaObject.className);
                 
                 ChangeTitlesByLanguage(StringsForLanguageChangeToLT['Titles'], "LT");
                 MsgBoxObject.style.display = "none";
@@ -1266,18 +1338,16 @@
                 NavigationBarAreaObject.classList.remove('active');
             }
 
-            if ((HamburgerControl.className == 'Hamburger active') && (ControlName != 'LT' && ControlName != 'RU' && ControlName != 'EN')) {
-                HamburgerControl.classList.remove('active');
-            }
-
             if (LabelCenterTopObject.className == 'LabelCenterTop active') {
                 LabelCenterTopObject.classList.remove('active');
             }
 
-
             //HAMBURGER OPEN MENU
-            if (ControlName == 'Hamburger') {
+            if ((ControlName == 'Hamburger' && HamburgerControl.className == 'Hamburger') || (ControlName == 'MenuLabel' && MenuLabelObject.className == 'MenuLabel')) {
                 OpenHamburgerMenu();
+            } else if ((HamburgerControl.className == 'Hamburger active' || MenuLabelObject.className == 'MenuLabel active') && (ControlName != 'LT' && ControlName != 'RU' && ControlName != 'EN')) {
+                HamburgerControl.classList.remove('active');
+                MenuLabelObject.classList.remove('active');
             }
         }
         
@@ -1287,6 +1357,8 @@
             HamburgerControl.classList.toggle('active');
             NavigationBarAreaObject.classList.toggle('active');
             LabelCenterTopObject.classList.toggle('active');
+
+            MenuLabelObject.classList.toggle('active');
         }
 
         // CENTER TOP LABEL GLOW ON PAGE LOAD
@@ -1326,6 +1398,8 @@
         // CENTER LABEL TEMP (INITIAL) VALUE and TEMP (INITIAL) FONT
         let LabelCenterTopObjectTempValue = LabelCenterTopObject.innerHTML;
         let LabelCenterTopFontTemp = getComputedStyle(LabelCenterTopObject)['font-family'];
+
+        let MenuLabelTempValue = MenuLabelObject.innerHTML;
 
         // CONTROLS TEMP (INITIAL) VALUES
         let AboutUsControlTempValue = AboutUsControl.innerHTML;
@@ -1374,6 +1448,8 @@
 
                 LangControlPressed.innerHTML = "EN";
 
+                MenuLabelObject.innerHTML = MenuTextArray['LabelMenu'] + AdditionalDivForGlowEffect;
+
                 AboutUsControl.innerHTML = MenuTextArray['AboutUsControl'] + AdditionalDivForGlowEffect;
                 OurTeamControl.innerHTML = MenuTextArray['OurTeamControl'] + AdditionalDivForGlowEffect;
                 ServicesControl.innerHTML = MenuTextArray['ServicesControl'] + AdditionalDivForGlowEffect;
@@ -1391,6 +1467,7 @@
                 LabelCenterTopObject.innerHTML = LabelCenterTopObjectTempValue;
                 LabelCenterTopObject.style.fontFamily = LabelCenterTopFontTemp;
 
+                MenuLabelObject.innerHTML = MenuLabelTempValue;
                 LangControlPressed.innerHTML = LangControlsTempValue;
 
                 AboutUsControl.innerHTML = AboutUsControlTempValue;
@@ -1420,7 +1497,6 @@
                 MsgTemp = GetTranslationsArrayByCurrentLanguage()['Titles']['SubmitButtonLogedIn'];
                 ShowMsg(MsgTemp, ColorGreen);
                 BtnSubmitObject.innerHTML = MsgTemp;
-
 
             } else if (AreLoginAndPassAccepted() == "no") {
                 MsgTemp = GetTranslationsArrayByCurrentLanguage()['MsgTexts']['LoginOrPassTooShort'];
@@ -1506,6 +1582,7 @@
 
                 LabelCenterTop : "Prisijunk prie Amiedra",
                 LabelCenterTopFont : "'Montez', cursive",
+                LabelMenu : "Meniu",
                 AboutUsControl : "Apie Mus",
                 OurTeamControl : "Mūsų Komanda",
                 ServicesControl : "Paslaugos",
@@ -1538,6 +1615,7 @@
 
                 LabelCenterTop : "Вход в\u2000Amiedra",
                 LabelCenterTopFont : "'Great Vibes', cursive",
+                LabelMenu : "Меню",
                 AboutUsControl : "О Нас",
                 OurTeamControl : "Наша Команда",
                 ServicesControl : "Услуги",
@@ -1568,6 +1646,7 @@
 
                 // LabelCenterTop : "EN Prisijunk prie Amiedra",
                 // LabelCenterTopFont : "'Montez', cursive",
+                // LabelMenu : "Meniu",
                 // AboutUsControl : "EN Apie Mus",
                 // OurTeamControl : "EN Mūsų Komanda",
                 // ServicesControl : "EN Paslaugos",
