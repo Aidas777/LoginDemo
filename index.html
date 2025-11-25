@@ -34,13 +34,16 @@
 
     .NavigationBar {
         margin-top: 3px;
-        position: relative;
+        /* position: relative; */
+        position: fixed;
         width: 100%;
         padding-top: 10px;
         padding-bottom: 10px;
         border-radius: 1rem;
         box-shadow: inset 0 0 30px rgb(79, 86, 146);
         display: flex;
+        z-index: 5;
+
     }
     .NavigationBarArea {
         display: flex;
@@ -70,7 +73,10 @@
         color: rgb(191, 191, 253);
         filter: blur(1px);
         opacity: 50%;
-        transition: all 0.4s ease;
+        /* right: 80px;
+        width: 20px;
+        letter-spacing: 5px; */
+        transition: all 0.4s linear;
     }
 
     .NavigationBarLinksBox {
@@ -211,6 +217,12 @@
         transform: translateY(-8px) rotate(-45deg);
     }
 
+    /* .Hamburger.active {
+        filter: blur(1px);
+        opacity: 70%;
+        transition: all 0.4s ease;
+    } */
+
 
     .NavigationBarArea.active {
         width: 60%;
@@ -271,7 +283,7 @@
         position: relative;
         width: 100%;
         height: 100%;
-        margin-top: 20px;
+        margin-top: 82px;
     }
 
     .LabelCenterTop {
@@ -964,6 +976,10 @@
             display: flex;
         }
 
+        .LoginContainer {
+            margin-top: 78px;
+        }
+
         .LabelCenterTop {
             font-size: 3.8rem;
             width: 80%;
@@ -1021,7 +1037,9 @@
 
         .LabelsBottomLeftBox {
             font-size: 0.7rem;
-
+            text-align: right;
+            left: unset;
+            right: 1%;
         }
 
         .LabelsBottomRightBox {
@@ -1042,7 +1060,7 @@
 
     @media screen and (max-width: 500px) {
         .LoginContainer {
-            margin-top: 35px;
+            margin-top: 88px;
             height: 90%;
         }
 
@@ -1055,7 +1073,7 @@
             margin-left: 5%;
             margin-right: 5%;
             font-size: 3.6rem;
-            margin-top: 3vh;
+            margin-top: 28px;
 
         }
 
@@ -1064,6 +1082,61 @@
             top:15%;
             clip-path: ellipse(70% 50%);
         }
+        /* /////////////////////////////////////////// */
+        @keyframes InOut {
+            from {
+                height: 0.1px;
+                width: 0.1px;
+                border-radius: 0;
+
+                margin-left: 3px;
+                margin-top: 3px;
+            }
+            to {
+                height: 3px;
+                width: 3px;
+                border-radius: 50%;
+
+                margin-left: 1px;
+                margin-top: 1px;
+            }
+
+        }
+
+        @keyframes Left-Right {
+            0% {
+                margin-left: 3px;
+                margin-top: 3px;
+                height: 0.1px;
+                width: 0.1px;
+            }
+            25% {
+                margin-left: 100px;
+                margin-top: -50px;
+                height: 3x;
+                width: 3px;     
+            }
+            50% {
+                margin-left: 100px;
+                margin-top: 50px;
+                height: 0.1px;
+                width: 0.1px;
+            }
+            75% {
+                margin-left: -30px;
+                margin-top: 50px;
+                height: 2px;
+                width: 2px;    
+            }
+            100% {
+                margin-left: 50px;
+                margin-top: -30px;
+                height: 0.1px;
+                width: 0.1px;     
+            }
+        }
+
+        /* /////////////////////////////////////////// */
 
         .InputFieldsBox {
             margin-top: 10px;
@@ -1215,11 +1288,11 @@
 
         <div class="LabelsBottomRightBox">
             <label class="LabelBottomRightCreator"></label>
-            <label class="LabelBottomRightVersion">Version: 2025.11.24</label>
+            <label class="LabelBottomRightVersion">Version: 2025.11.25</label>
         </div>
 
         <div class="LabelsBottomLeftBox">
-            I am everywhere, but you won't see me.<br>I dwell inside your Heart. Rumi.
+            I am everywhere, but you won't know me.<br>I dwell inside your Heart. Rumi.
         </div>
     </div>
     
@@ -1245,6 +1318,7 @@
         const HamburgerControl = document.getElementsByClassName('Hamburger')[0];
         const NavigationBarAreaObject  = document.getElementsByClassName('NavigationBarArea')[0];
         const LabelCenterTopObject = document.getElementsByClassName('LabelCenterTop')[0];
+        const DemoLabelBottomObject = document.getElementsByClassName('DemoLabelBottom')[0];
 
         const MsgBoxObject = document.getElementById('MsgBox');
 
@@ -1267,12 +1341,13 @@
                 StarPoints.className = "StarPoints";
                 StarPoints.style.position = "absolute";
 
-                // let PointRadius;
-                // if (screen.width > 500) {
-                let PointRadius = Math.random() * 3;
-                // } else {
-                //     PointRadius = Math.random();
-                // }
+                let PointRadius;
+                if (window.innerWidth > 500) {
+                    PointRadius= Math.random() * 3;
+                } else {
+                    // alert("iki 500: " + window.innerWidth);
+                    PointRadius = Math.random();
+                }
 
                 StarPoints.style.height = PointRadius + UnitsPx;
                 StarPoints.style.width = PointRadius + UnitsPx;
@@ -1353,6 +1428,7 @@
             } else if ((HamburgerControl.className == 'Hamburger active' || MenuLabelObject.className == 'MenuLabel active') && (ControlName != 'LT' && ControlName != 'RU' && ControlName != 'EN')) {
                 HamburgerControl.classList.remove('active');
                 MenuLabelObject.classList.remove('active');
+                // DemoLabelBottomObject.style.filter = 'none';
             }
         }
         
@@ -1364,6 +1440,7 @@
             LabelCenterTopObject.classList.toggle('active');
 
             MenuLabelObject.classList.toggle('active');
+            // DemoLabelBottomObject.style.filter = 'blur(3px)';
         }
 
         // CENTER TOP LABEL GLOW ON PAGE LOAD
