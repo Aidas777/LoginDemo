@@ -1309,6 +1309,7 @@
             }
         }
 
+        let CurrentUrl = window.location.href;
         
         //REFRESH BOTTOM LABEL DATE IF CODE AT THE END IS ACTVATED (OTHERWISE DATE IS NOT DISPLAYED)
         document.getElementsByClassName("LabelBottomRightCreator")[0].innerHTML = "Created by Aidas (amiedra@gmail.com)"; /*+ new Date().getFullYear();*/
@@ -1388,6 +1389,7 @@
                 ShowMsg(GetTranslationsArrayByCurrentLanguage()['MsgTexts']['ForDevelopment'], ColorRed);
                 
             } else if (ControlName == 'LoginControl' && ActionName == 'ShowMsg') {
+                alert(CurrentUrl);
                 window.location.replace(Parametter);
                 ShowMsg(GetTranslationsArrayByCurrentLanguage()['MsgTexts']['AlreadyOnLoginPage'], ColorRed);
 
@@ -1774,3 +1776,4 @@
 </body>
 
 </html>
+
